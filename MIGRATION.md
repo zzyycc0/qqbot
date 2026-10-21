@@ -35,7 +35,6 @@ Git 保存：控制台和网关源码、服务模板、示例配置、依赖版�
 - AstrBot 与插件通过本地模型网关访问模型服务。
 - 网关实现 OpenAI 兼容接口，并支持模型路由、用量记录和预算限制。
 - QQ 客户端、AstrBot 和插件均由各自上游提供；版本参考 [docs/dependencies.lock.md](docs/dependencies.lock.md)。
-- 早期自研生活系统仍在 `life-engine/` 中供参考，归档运行方案以固定的上游陪伴插件为主。
 - 网关非流式请求是当前实现的已知约束。上游兼容性问题记录在 [docs/04-relay-sse-issue.md](docs/04-relay-sse-issue.md)。
 
 ## 干净迁移时需要重新提供

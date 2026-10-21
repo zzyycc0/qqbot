@@ -533,53 +533,6 @@ ipcMain.handle('model:balance', async () => {
   }
 });
 
-ipcMain.handle('life:info', async () => {
-  try {
-    const r = await exec('python3 /opt/qqb/scripts/life_info.py', 25000);
-    return { ok: true, data: JSON.parse(r.out) };
-  } catch (e) {
-    return { ok: false, error: String((e && e.message) || e) };
-  }
-});
-
-const LIFE_DIR = '/opt/qqb/AstrBot-master/data/plugins/astrbot_plugin_life_engine';
-
-ipcMain.handle('life:getPersona', async () => {
-  try {
-    const r = await exec(`cat ${LIFE_DIR}/persona.json`, 15000);
-    return { ok: true, data: JSON.parse(r.out) };
-  } catch (e) {
-    return { ok: false, error: String((e && e.message) || e) };
-  }
-});
-
-ipcMain.handle('life:savePersona', async (_e, data) => {
-  try {
-    await sftpWrite(`${LIFE_DIR}/persona.json`, JSON.stringify(data, null, 2));
-    return { ok: true };
-  } catch (e) {
-    return { ok: false, error: String((e && e.message) || e) };
-  }
-});
-
-ipcMain.handle('life:getSettings', async () => {
-  try {
-    const r = await exec(`cat ${LIFE_DIR}/data/settings.json 2>/dev/null || echo {}`, 15000);
-    return { ok: true, data: JSON.parse(r.out || '{}') };
-  } catch (e) {
-    return { ok: true, data: {} };
-  }
-});
-
-ipcMain.handle('life:saveSettings', async (_e, data) => {
-  try {
-    await sftpWrite(`${LIFE_DIR}/data/settings.json`, JSON.stringify(data, null, 2));
-    return { ok: true };
-  } catch (e) {
-    return { ok: false, error: String((e && e.message) || e) };
-  }
-});
-
 // ---------- 陪伴面板（独立 WebUI + SSH 隧道） ----------
 const COMPANION_CFG = '/opt/qqb/AstrBot-master/data/config/astrbot_plugin_private_companion_config.json';
 const PANEL_LOCAL_PORT = 16190;
