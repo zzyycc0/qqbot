@@ -1,0 +1,20 @@
+[Unit]
+Description=QQ Companion NapCat (Linux QQ)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/Napcat
+EnvironmentFile=-/etc/qq-companion/napcat.env
+ExecStart=/opt/qqb/server/napcat-start.sh
+Restart=on-failure
+RestartSec=10
+KillMode=mixed
+TimeoutStopSec=20
+StandardOutput=append:/root/napcat.log
+StandardError=append:/root/napcat.log
+
+[Install]
+WantedBy=multi-user.target

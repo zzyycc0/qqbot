@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "migration": {
+    "reuse_private_companion_data": "<REDACTED>"
+  },
+  "qzone": {
+    "enabled": false,
+    "cookie": "",
+    "life_publish_enabled": false,
+    "comment_inbox_enabled": false,
+    "generated_image_enabled": false
+  },
+  "creative": {
+    "enable_creative_writing": true,
+    "creative_inspiration_probability": 0.2,
+    "creative_share_probability": 0.28,
+    "creative_chars_per_session": 220,
+    "creative_max_active_projects": 2,
+    "creative_direction_prompt": "",
+    "enable_creative_cover_generation": false,
+    "CREATIVE_PROVIDER_ID": "官方 DeepSeek（兜底）",
+    "CREATIVE_OUTLINE_PROVIDER_ID": "官方 DeepSeek（兜底）",
+    "CREATIVE_REVIEW_PROVIDER_ID": "官方 DeepSeek（兜底）"
+  }
+}

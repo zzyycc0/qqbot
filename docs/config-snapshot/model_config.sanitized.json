@@ -1,0 +1,126 @@
+{
+  "models": [
+    {
+      "id": "official-deepseek",
+      "name": "官方 DeepSeek（兜底）",
+      "base_url": "https://api.example.invalid/v1",
+      "api_key": "<REDACTED>",
+      "model": "deepseek-flash",
+      "enabled": true,
+      "price_in": 2,
+      "price_out": 8,
+      "balance": "deepseek",
+      "note": "官方，按高峰价估算"
+    },
+    {
+      "id": "relay-deepseek",
+      "name": "中转 DeepSeek",
+      "base_url": "https://api.example.invalid/v1",
+      "api_key": "<REDACTED>",
+      "model": "deepseek-v4.1-flash",
+      "enabled": true,
+      "price_in": 0.8,
+      "price_out": 3,
+      "console": "",
+      "note": "首选聊天；价格按估算，可改"
+    },
+    {
+      "id": "free-luna",
+      "name": "福利 GPT-6 Luna（每日免费额度）",
+      "base_url": "https://api.example.invalid/v1",
+      "api_key": "<REDACTED>",
+      "model": "gpt-6-luna",
+      "enabled": true,
+      "price_in": 0.6,
+      "price_out": 2.4,
+      "console": "",
+      "note": "后台任务优先用这个"
+    },
+    {
+      "id": "month-luna",
+      "name": "月费 GPT-6 Luna",
+      "base_url": "https://api.example.invalid/v1",
+      "api_key": "<REDACTED>",
+      "model": "gpt-6-luna",
+      "enabled": true,
+      "price_in": 0.6,
+      "price_out": 2.4,
+      "console": "",
+      "note": "当前该 Key 的 Luna 上游报 502，先备用"
+    },
+    {
+      "id": "month-sol",
+      "name": "月费 GPT-6.1 Sol",
+      "base_url": "https://api.example.invalid/v1",
+      "api_key": "<REDACTED>",
+      "model": "gpt-6.1-sol",
+      "enabled": true,
+      "price_in": 8,
+      "price_out": 32,
+      "console": "",
+      "note": "重要时刻首选"
+    },
+    {
+      "id": "balance-luna",
+      "name": "余额 GPT-6 Luna",
+      "base_url": "https://api.example.invalid/v1",
+      "api_key": "<REDACTED>",
+      "model": "gpt-6-luna",
+      "enabled": true,
+      "price_in": 0.6,
+      "price_out": 2.4,
+      "console": "",
+      "note": "后台备用"
+    },
+    {
+      "id": "balance-sol",
+      "name": "余额 GPT-6.1 Sol",
+      "base_url": "https://api.example.invalid/v1",
+      "api_key": "<REDACTED>",
+      "model": "gpt-6.1-sol",
+      "enabled": true,
+      "price_in": 8,
+      "price_out": 32,
+      "console": "",
+      "note": "重要时刻备用"
+    }
+  ],
+  "roles": {
+    "chat": {
+      "name": "官方 DeepSeek",
+      "models": [
+        "official-deepseek",
+        "relay-deepseek"
+      ],
+      "daily_budget": 5
+    },
+    "background": {
+      "name": "官方 DeepSeek · 后台",
+      "models": [
+        "official-deepseek",
+        "relay-deepseek"
+      ],
+      "daily_budget": 2
+    },
+    "deep": {
+      "name": "官方 DeepSeek · 重要时刻",
+      "models": [
+        "official-deepseek",
+        "relay-deepseek"
+      ],
+      "daily_budget": 1
+    },
+    "explore": {
+      "name": "中转 DeepSeek",
+      "models": [
+        "relay-deepseek",
+        "official-deepseek"
+      ],
+      "daily_budget": 2
+    }
+  },
+  "global": {
+    "daily_budget": 0,
+    "alert_ratio": 0.8
+  }
+}

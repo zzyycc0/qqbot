@@ -1,0 +1,6 @@
+[Unit]
+Description=QQ Companion local backup
+
+[Service]
+Type=oneshot
+ExecStart=/opt/qqb/server/backup.sh

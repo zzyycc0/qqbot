@@ -1,0 +1,18 @@
+[Unit]
+Description=QQ Companion AstrBot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/qqb/AstrBot-master
+ExecStart=/opt/qqb/AstrBot-master/venv/bin/python main.py
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=20
+StandardOutput=append:/root/astrbot.log
+StandardError=append:/root/astrbot.log
+
+[Install]
+WantedBy=multi-user.target

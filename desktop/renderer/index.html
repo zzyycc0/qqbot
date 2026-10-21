@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QQ 陪伴 · 控制台</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <div class="brand">
+        <div class="logo">Q</div>
+        <div>
+          <div class="brand-name">QQ 陪伴</div>
+          <div class="brand-sub">本地控制台</div>
+        </div>
+      </div>
+      <nav>
+        <button data-tab="overview" class="active">总览</button>
+        <button data-tab="qq">QQ 登录</button>
+        <button data-tab="services">服务</button>
+        <button data-tab="model">费用</button>
+        <button data-tab="backup">备份</button>
+        <button data-tab="logs">日志</button>
+        <button data-tab="settings">设置</button>
+      </nav>
+      <div class="side-foot">
+        <div class="conn"><span id="conn-dot" class="dot"></span><span id="conn-text">连接中…</span></div>
+        <button id="panel-open" class="btn panel-btn">打开陪伴面板 ↗</button>
+        <div class="muted tiny">她的生活 / 人设 / 记忆 / 主动消息在面板里</div>
+      </div>
+    </aside>
+
+    <main>
+      <header class="top">
+        <div>
+          <h1 id="page-title">总览</h1>
+          <div class="sub" id="server-line">—</div>
+        </div>
+        <div class="top-actions">
+          <span id="updated" class="muted"></span>
+          <button id="refresh" class="btn">刷新</button>
+        </div>
+      </header>
+
+      <!-- ================= 总览 ================= -->
+      <section id="tab-overview" class="tab active">
+        <div class="cards">
+          <div class="card">
+            <div class="card-label">服务器</div>
+            <div class="card-main" id="ov-host">—</div>
+            <div class="card-sub" id="ov-uptime">—</div>
+          </div>
+          <div class="card">
+            <div class="card-label">内存</div>
+            <div class="card-main" id="ov-mem">—</div>
+            <div class="bar"><i id="ov-mem-bar"></i></div>
+          </div>
+          <div class="card">
+            <div class="card-label">磁盘</div>
+            <div class="card-main" id="ov-disk">—</div>
+            <div class="bar"><i id="ov-disk-bar"></i></div>
+          </div>
+          <div class="card">
+            <div class="card-label">QQ / 消息通道</div>
+            <div class="card-main" id="ov-qq">—</div>
+            <div class="card-sub" id="ov-adapter">—</div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="panel">
+            <div class="panel-head"><h2>服务</h2><button class="btn small" id="ov-services-refresh">刷新</button></div>
+            <div id="ov-services" class="svc-list"></div>
+            <div class="row-actions">
+              <button class="btn small" data-restart="astrbot">重启 AstrBot</button>
+              <button class="btn small" data-restart="napcat">重启 NapCat</button>
+              <button class="btn small" data-restart="gateway">重启网关</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>今日模型花费</h2><button class="btn small" id="ov-cost-refresh">刷新</button></div>
+            <div id="ov-cost" class="cost-list"></div>
+            <div class="row-actions">
+              <button class="btn small" id="ov-open-model">查看费用</button>
+              <button class="btn small" id="ov-balance">查余额</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="panel">
+            <div class="panel-head"><h2>一键诊断</h2><button class="btn primary small" id="diag-run">运行诊断</button></div>
+            <div id="diag-list" class="diag-list"><div class="muted">点“运行诊断”检查服务、端口、QQ、模型、备份。</div></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>快捷操作</h2></div>
+            <div class="quick-grid">
+              <button class="quick" id="quick-backup"><b>立即备份</b><span>打包并下载到本地</span></button>
+              <button class="quick" id="quick-panel"><b>陪伴面板</b><span>她的生活与人设</span></button>
+              <button class="quick" id="quick-qq"><b>QQ 登录</b><span>扫码 / 快速登录</span></button>
+              <button class="quick" id="quick-logs"><b>看日志</b><span>NapCat / AstrBot / 网关</span></button>
+            </div>
+            <div class="kv">
+              <div><span>自动备份</span><b id="ov-backup-timer">—</b></div>
+              <div><span>公网 IP</span><b id="ov-ip">—</b></div>
+              <div><span>监听端口</span><b id="ov-ports">—</b></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= QQ 登录 ================= -->
+      <section id="tab-qq" class="tab">
+        <div class="grid2 qq-grid">
+          <div class="panel qr-panel">
+            <div class="panel-head"><h2>扫码登录</h2><span id="qr-status" class="muted"></span></div>
+            <div class="qr-box"><img id="qr-img" alt="二维码" /><div id="qr-empty" class="qr-empty">点“刷新二维码”生成</div></div>
+            <div class="row-actions">
+              <button class="btn primary" id="qr-refresh">刷新二维码</button>
+              <button class="btn" id="qr-quick">切快速登录模式</button>
+            </div>
+            <div class="note">用机器人 QQ 扫码并点“允许登录”。新服务器首次需要扫码；登录后可按 NapCat 配置切换快速登录。</div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>登录状态</h2><button class="btn small" id="qq-refresh">刷新</button></div>
+            <div class="kv big">
+              <div><span>NapCat</span><b id="qq-svc">—</b></div>
+              <div><span>QQ 进程</span><b id="qq-proc">—</b></div>
+              <div><span>消息通道</span><b id="qq-adapter">—</b></div>
+              <div><span>当前模式</span><b id="qq-mode">—</b></div>
+            </div>
+            <div class="log-mini" id="qq-last">—</div>
+            <div class="note">如果二维码一直不显示，先看「服务」里 NapCat 是否运行，再看「日志 → NapCat」。不要连续快速刷新二维码，容易触发风控。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 服务 ================= -->
+      <section id="tab-services" class="tab">
+        <div class="panel">
+          <div class="panel-head"><h2>服务状态</h2><div class="row-actions"><button class="btn small" id="svc-refresh">刷新</button><button class="btn small danger" id="svc-restart-all">全部重启</button></div></div>
+          <table class="table">
+            <thead><tr><th>服务</th><th>状态</th><th>开机自启</th><th>说明</th><th>操作</th></tr></thead>
+            <tbody id="svc-tbody"></tbody>
+          </table>
+          <div class="note">NapCat 负责 QQ，AstrBot 负责聊天与插件，模型网关负责模型路由、记账和限额。改完模型配置会自动重启网关和 AstrBot。</div>
+        </div>
+      </section>
+
+      <!-- ================= 费用 ================= -->
+      <section id="tab-model" class="tab">
+        <div class="panel">
+          <div class="panel-head"><h2>今日费用</h2><button class="btn small" id="cost-refresh">刷新</button></div>
+          <div id="model-cost"></div>
+          <div class="note">模型选择在 <b>陪伴面板 → 模型</b> 里配置（每个场景选一个模型）；这里只按模型汇总费用和 token，不做模型配置，避免两边打架。</div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>账户余额</h2><button class="btn small" id="balance-refresh">刷新余额</button></div>
+          <div id="balance-list" class="balance-list"><div class="muted">点刷新读取官方 DeepSeek 和中转站余额。</div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>模型出问题怎么查</h2></div>
+          <div class="note">
+            1. 先看「总览 → 一键诊断」里的网关和端口是否正常。<br />
+            2. 看「日志 → 网关」有没有 <code>FAIL role=</code> 或 502。<br />
+            3. 模型配置在陪伴面板里改；改完插件会自己走网关，不需要在这重启服务。
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 备份 ================= -->
+      <section id="tab-backup" class="tab">
+        <div class="grid2">
+          <div class="panel">
+            <div class="panel-head"><h2>备份</h2><span id="backup-timer" class="badge">—</span></div>
+            <div class="row-actions">
+              <button class="btn primary" id="backup-run">立即备份并下载</button>
+              <button class="btn" id="backup-refresh">刷新列表</button>
+              <button class="btn" id="backup-open-dir">打开本地目录</button>
+            </div>
+            <div class="note" id="backup-local-dir">—</div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>恢复说明</h2></div>
+            <div class="note">
+              恢复是危险操作，不在软件里做一键恢复。换服务器时按文档：新机装环境 → 解压备份 → 恢复 <code>/opt/qqb/AstrBot-master/data</code>、<code>/opt/qqb/data</code>、<code>/opt/qqb/gateway</code>、NapCat 配置 → 启动 → QQ 扫码。
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>服务器上的备份</h2><span class="muted">保留最近 7 份</span></div>
+          <table class="table">
+            <thead><tr><th>文件</th><th>大小</th><th>时间</th><th>操作</th></tr></thead>
+            <tbody id="backup-remote-tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>本地已有备份</h2></div>
+          <table class="table">
+            <thead><tr><th>文件</th><th>大小</th><th>时间</th><th>操作</th></tr></thead>
+            <tbody id="backup-local-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= 日志 ================= -->
+      <section id="tab-logs" class="tab">
+        <div class="panel">
+          <div class="panel-head"><h2>日志</h2>
+            <div class="row-actions">
+              <div class="seg" id="log-seg">
+                <button data-src="napcat" class="active">NapCat</button>
+                <button data-src="astrbot">AstrBot</button>
+                <button data-src="gateway">网关</button>
+                <button data-src="system">系统</button>
+              </div>
+              <button class="btn small" id="log-refresh">刷新</button>
+            </div>
+          </div>
+          <pre id="log-view" class="log-view">点刷新加载日志</pre>
+        </div>
+      </section>
+
+      <!-- ================= 设置 ================= -->
+      <section id="tab-settings" class="tab">
+        <div class="panel">
+          <div class="panel-head"><h2>服务器连接</h2><button class="btn small" id="cfg-test">测试连接</button></div>
+          <div class="form-grid">
+            <label>服务器 IP<input id="cfg-host" /></label>
+            <label>端口<input id="cfg-port" type="number" /></label>
+            <label>用户<input id="cfg-user" /></label>
+            <label>机器人 QQ<input id="cfg-uin" /></label>
+            <label class="wide">SSH 私钥路径<input id="cfg-key" /></label>
+            <label class="wide">本地备份目录<input id="cfg-backup" /></label>
+          </div>
+          <div class="row-actions"><button class="btn primary" id="cfg-save">保存设置</button><span id="cfg-msg" class="muted"></span></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>陪伴面板</h2></div>
+          <div class="kv">
+            <div><span>访问令牌</span><b id="panel-token">—</b></div>
+            <div><span>本地端口</span><b>16190 → 6190</b></div>
+          </div>
+          <div class="row-actions">
+            <button class="btn primary" id="panel-open2">打开陪伴面板</button>
+            <button class="btn" id="panel-copy">复制令牌</button>
+            <button class="btn" id="panel-refresh-token">刷新令牌</button>
+          </div>
+          <div class="note">面板里管她的人设、日程、关系、主动消息、记忆；这个控制台只管服务器和模型。</div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>关于</h2></div>
+          <div class="note">QQ 陪伴本地控制台 v0.3 · 服务器：<span id="about-host">—</span> · 面板：16190 · 模型：网关 6198</div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

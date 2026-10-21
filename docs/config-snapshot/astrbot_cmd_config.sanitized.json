@@ -1,0 +1,223 @@
+{
+  "config_version": 5,
+  "provider_sources": [
+    {
+      "id": "gateway_source",
+      "provider": "openai",
+      "type": "openai_chat_completion",
+      "provider_type": "chat_completion",
+      "key": [
+        "sk-gateway"
+      ],
+      "api_base": "http://127.0.0.1:6198/v1",
+      "timeout": 180,
+      "proxy": "",
+      "custom_headers": {}
+    }
+  ],
+  "provider": [
+    {
+      "id": "官方 DeepSeek（兜底）",
+      "enable": true,
+      "model": "official-deepseek",
+      "provider_source_id": "gateway_source",
+      "modalities": [],
+      "custom_extra_body": {}
+    },
+    {
+      "id": "中转 DeepSeek",
+      "enable": true,
+      "model": "relay-deepseek",
+      "provider_source_id": "gateway_source",
+      "modalities": [],
+      "custom_extra_body": {}
+    },
+    {
+      "id": "福利 GPT-6 Luna（每日免费额度）",
+      "enable": true,
+      "model": "free-luna",
+      "provider_source_id": "gateway_source",
+      "modalities": [],
+      "custom_extra_body": {}
+    },
+    {
+      "id": "月费 GPT-6 Luna",
+      "enable": true,
+      "model": "month-luna",
+      "provider_source_id": "gateway_source",
+      "modalities": [],
+      "custom_extra_body": {}
+    },
+    {
+      "id": "月费 GPT-6.1 Sol",
+      "enable": true,
+      "model": "month-sol",
+      "provider_source_id": "gateway_source",
+      "modalities": [],
+      "custom_extra_body": {}
+    },
+    {
+      "id": "余额 GPT-6 Luna",
+      "enable": true,
+      "model": "balance-luna",
+      "provider_source_id": "gateway_source",
+      "modalities": [],
+      "custom_extra_body": {}
+    },
+    {
+      "id": "余额 GPT-6.1 Sol",
+      "enable": true,
+      "model": "balance-sol",
+      "provider_source_id": "gateway_source",
+      "modalities": [],
+      "custom_extra_body": {}
+    }
+  ],
+  "provider_settings": {
+    "enable": true,
+    "default_image_caption_provider_id": "",
+    "image_caption_prompt": "Please describe the image using Chinese.",
+    "provider_pool": [
+      "*"
+    ],
+    "wake_prefix": "",
+    "web_search": false,
+    "websearch_provider": "tavily",
+    "websearch_tavily_key": [],
+    "websearch_bocha_key": [],
+    "websearch_brave_key": [],
+    "websearch_baidu_app_builder_key": "<REDACTED>",
+    "websearch_firecrawl_key": [],
+    "websearch_exa_key": [],
+    "websearch_anysearch_key": [],
+    "websearch_deepseek_key": [],
+    "websearch_serpapi_key": [],
+    "web_search_link": false,
+    "display_reasoning_text": false,
+    "identifier": false,
+    "group_name_display": false,
+    "datetime_system_prompt": true,
+    "persona_pool": [
+      "*"
+    ],
+    "prompt_prefix": "{{prompt}}",
+    "streaming_response": false,
+    "show_tool_use_status": false,
+    "show_tool_call_result": false,
+    "buffer_intermediate_messages": false,
+    "max_quoted_fallback_images": 20,
+    "quoted_message_parser": {
+      "max_component_chain_depth": 4,
+      "max_forward_node_depth": 6,
+      "max_forward_fetch": 32,
+      "warn_on_action_failure": false
+    },
+    "unsupported_streaming_strategy": "realtime_segmenting",
+    "reachability_check": false,
+    "file_extract": {
+      "enable": false,
+      "provider": "moonshotai",
+      "moonshotai_api_key": "<REDACTED>"
+    },
+    "proactive_capability": {
+      "add_cron_tools": true
+    },
+    "computer_use_runtime": "none",
+    "computer_use_local_permissions": {
+      "member": {
+        "allow_execution": false,
+        "allow_network": false,
+        "filesystem_scope": "workspace"
+      },
+      "admin": {
+        "allow_execution": true,
+        "allow_network": true,
+        "filesystem_scope": "host"
+      }
+    },
+    "computer_use_require_admin": true,
+    "sandbox": {
+      "booter": "shipyard_neo",
+      "shipyard_endpoint": "",
+      "shipyard_access_token": "<REDACTED>",
+      "shipyard_ttl": 3600,
+      "shipyard_max_sessions": 10,
+      "shipyard_neo_endpoint": "",
+      "shipyard_neo_access_token": "<REDACTED>",
+      "shipyard_neo_profile": "python-default",
+      "shipyard_neo_ttl": 3600,
+      "cua_image": "linux",
+      "cua_os_type": "linux",
+      "cua_idle_timeout": 0,
+      "cua_telemetry_enabled": false,
+      "cua_local": true,
+      "cua_api_key": "<REDACTED>"
+    },
+    "image_compress_options": {
+      "max_size": 1280
+    }
+  },
+  "platform": [
+    {
+      "id": "napcat",
+      "type": "aiocqhttp",
+      "enable": true,
+      "ws_reverse_host": "127.0.0.1",
+      "ws_reverse_port": 6199,
+      "ws_reverse_token": "<REDACTED>"
+    }
+  ],
+  "platform_settings": {
+    "unique_session": false,
+    "rate_limit": {
+      "time": 60,
+      "count": 30,
+      "strategy": "stall"
+    },
+    "reply_prefix": "",
+    "forward_threshold": 1500,
+    "enable_id_white_list": true,
+    "id_whitelist": [],
+    "id_whitelist_log": true,
+    "wl_ignore_admin_on_group": true,
+    "wl_ignore_admin_on_friend": true,
+    "reply_with_mention": false,
+    "reply_with_quote": false,
+    "path_mapping": [],
+    "segmented_reply": {
+      "enable": false,
+      "only_llm_result": true,
+      "interval_method": "random",
+      "interval": "1.5,3.5",
+      "log_base": 2.6,
+      "words_count_threshold": 150,
+      "split_mode": "regex",
+      "regex": ".*?[。？！~…]+|.+$",
+      "split_words": [
+        "。",
+        "？",
+        "！",
+        "~",
+        "…"
+      ],
+      "content_cleanup_rule": ""
+    },
+    "no_permission_reply": true,
+    "empty_mention_waiting": true,
+    "empty_mention_waiting_need_reply": true,
+    "friend_message_needs_wake_prefix": false,
+    "ignore_bot_self_message": false,
+    "ignore_at_all": false
+  },
+  "timezone": "Asia/Shanghai",
+  "wake_prefix": [
+    "/"
+  ],
+  "t2i": false,
+  "admins_id": [],
+  "plugin_set": [
+    "*"
+  ],
+  "persona": [],
+  "log_level": "INFO"
+}

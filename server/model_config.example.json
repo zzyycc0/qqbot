@@ -1,0 +1,22 @@
+{
+  "models": [
+    {
+      "id": "example-model",
+      "name": "替换为你的模型名称",
+      "base_url": "https://api.example.invalid/v1",
+      "api_key": "REPLACE_WITH_API_KEY",
+      "model": "REPLACE_WITH_PROVIDER_MODEL_ID",
+      "enabled": false,
+      "price_in": 0,
+      "price_out": 0,
+      "note": "填写真实端点、模型 ID、Key 和价格后再启用"
+    }
+  ],
+  "roles": {
+    "chat": { "name": "主聊天", "models": ["example-model"], "daily_budget": 2.0 },
+    "background": { "name": "后台", "models": ["example-model"], "daily_budget": 0.5 },
+    "deep": { "name": "重要时刻", "models": ["example-model"], "daily_budget": 0.3 },
+    "explore": { "name": "探索", "models": ["example-model"], "daily_budget": 0.2 }
+  },
+  "global": { "daily_budget": 3.0, "alert_ratio": 0.8 }
+}

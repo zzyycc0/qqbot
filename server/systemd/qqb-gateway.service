@@ -1,0 +1,17 @@
+[Unit]
+Description=QQ Companion Model Gateway
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/qqb
+ExecStart=/usr/bin/python3 /opt/qqb/gateway/main.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=append:/opt/qqb/logs/gateway.out.log
+StandardError=append:/opt/qqb/logs/gateway.out.log
+
+[Install]
+WantedBy=multi-user.target

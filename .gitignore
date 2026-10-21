@@ -1,0 +1,40 @@
+# Private credentials, backups, and local server inventories
+/secrets/
+**/*.pem
+**/phone_key
+**/qqb_ed25519
+**/model_config.json
+**/remote-inventory*.txt
+**/provider-info.txt
+*.tar
+*.tar.gz
+*.tgz
+*.tar.xz
+*.zip
+*.sha256
+*.bak
+*.tmp
+
+# Local dependencies and generated data
+**/node_modules/
+**/__pycache__/
+*.py[cod]
+*.log
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.db
+.env
+.env.*
+!.env.example
+
+# Local UI captures may contain account or access information
+/artifacts/
+/desktop/dist/
+/desktop/release/
+/desktop/out/
+.DS_Store
+Thumbs.db
+
+# Local desktop package configuration may contain registry credentials
+/desktop/.npmrc
